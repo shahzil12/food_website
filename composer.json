@@ -33,8 +33,8 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "@php artisan migrate --force",
-            "@php artisan db:seed --force"
+            "@php artisan migrate --force --no-interaction || true",
+            "@php artisan db:seed --force --no-interaction || true"
         ],
         "setup": [
             "composer install",
