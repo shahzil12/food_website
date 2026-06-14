@@ -20,7 +20,16 @@ Route::get('/run-seed', function () {
     try {
         \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
         \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]);
-        return "Migrations and seeding completed successfully! <a href='" . url('/') . "'>Go to Home</a>";
+        
+        $userCount = \App\Models\User::count();
+        $categoryCount = \App\Models\Category::count();
+        $foodCount = \App\Models\Food::count();
+        
+        return "Migrations and seeding completed successfully!<br>" .
+               "Users in DB: $userCount<br>" .
+               "Categories in DB: $categoryCount<br>" .
+               "Food Items in DB: $foodCount<br>" .
+               "<a href='" . url('/') . "'>Go to Home</a>";
     } catch (\Exception $e) {
         return "Error running migrations/seeder: " . $e->getMessage();
     }
