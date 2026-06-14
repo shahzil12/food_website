@@ -261,7 +261,7 @@
                         <td>
                             <img src="{{ asset('foodimage/' . $food->image) }}" class="food-img" alt="{{ $food->title }}">
                         </td>
-                        <td style="font-weight: 600; color: #2f3542;">{{ $food->title }}</td>
+                        <td style="font-weight: 600; color: #fff;">{{ $food->title }}</td>
                         <td style="color: #888; font-size: 13px; max-width: 250px;">
                             {{ Str::limit($food->description, 50) }}
                         </td>
