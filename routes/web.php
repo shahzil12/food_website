@@ -15,6 +15,17 @@ Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::post('/contact-post', [HomeController::class, 'contact_post'])->name('contact.post');
 Route::get('/categories', [HomeController::class, 'categories'])->name('categories');
 
+// Temporary Database Migration & Seeding helper route
+Route::get('/run-seed', function () {
+    try {
+        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+        \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]);
+        return "Migrations and seeding completed successfully! <a href='" . url('/') . "'>Go to Home</a>";
+    } catch (\Exception $e) {
+        return "Error running migrations/seeder: " . $e->getMessage();
+    }
+});
+
 // Login aur Register ke liye alag routes banaye hain
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
