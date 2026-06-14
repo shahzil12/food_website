@@ -130,6 +130,7 @@
             margin-bottom: 20px;
             border-left: 4px solid #ff4757;
         }
+    </style>
 </head>
 <body>
 
