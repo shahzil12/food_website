@@ -37,6 +37,13 @@ class AuthController extends Controller
 
     // --- 3. HANDLE REGISTER ---
     public function register(Request $request) {
+        // Validate the input
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6'
+        ]);
+
         // Create the User in DB
         $user = new User();
         $user->name = $request->name;

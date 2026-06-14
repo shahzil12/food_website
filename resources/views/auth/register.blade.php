@@ -113,7 +113,23 @@
         a:hover {
             text-decoration: underline;
         }
-    </style>
+
+        /* 7. Error Messages */
+        .error-message {
+            color: #ff4757;
+            font-size: 14px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+        }
+
+        .alert {
+            background-color: #ffe5e5;
+            color: #ff4757;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #ff4757;
+        }
 </head>
 <body>
 
@@ -128,19 +144,37 @@
         <div>
             <form action="{{ url('/register-post') }}" method="POST">
                 @csrf
+
+                @if ($errors->any())
+                    <div class="alert">
+                        @foreach ($errors->all() as $error)
+                            <div>• {{ $error }}</div>
+                        @endforeach
+                    </div>
+                @endif
+
                 <div class="input-group">
                     <label for="name">Full Name</label>
-                    <input type="text" name="name" id="name" placeholder="John Doe" required>
+                    <input type="text" name="name" id="name" placeholder="John Doe" value="{{ old('name') }}" required>
+                    @error('name')
+                        <div class="error-message">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="input-group">
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" placeholder="example@mail.com" required>
+                    <input type="email" name="email" id="email" placeholder="example@mail.com" value="{{ old('email') }}" required>
+                    @error('email')
+                        <div class="error-message">{{ $message }}</div>
+                    @enderror
                 </div>
                 
                 <div class="input-group">
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" placeholder="Create a strong password" required>
+                    @error('password')
+                        <div class="error-message">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div>
